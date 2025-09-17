@@ -352,7 +352,7 @@
             overflow: hidden;
             position: relative;
             transition: var(--transition);
-            height: 500px; /* Увеличил высоту для вертикальных фото */
+            height: 500px;
         }
         
         .gallery-item:hover {
@@ -400,6 +400,121 @@
         
         .gallery-overlay p {
             margin-bottom: 1.5rem;
+        }
+
+        /* Feedback Slider Section */
+        .feedback {
+            padding: 8rem 0;
+            background-color: var(--light-color);
+        }
+
+        .feedback-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .feedback-slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            user-select: none;
+            touch-action: pan-y;
+        }
+
+        .feedback-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .feedback-slide {
+            flex: 0 0 33.33%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .feedback-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .feedback-slide:hover .feedback-image {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .feedback-nav-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--light-color);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .feedback-nav-button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 992px) {
+            .feedback-slide {
+                flex: 0 0 50%;
+            }
+            .feedback-image {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feedback-slide {
+                flex: 0 0 100%;
+            }
+            .feedback-image {
+                height: 300px;
+            }
+            .feedback-nav-button {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .feedback {
+                padding: 4rem 0;
+            }
+            .feedback-image {
+                height: 250px;
+            }
+            .feedback-nav {
+                padding: 0 10px;
+            }
+            .feedback-nav-button {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
         }
         
         /* CTA Section */
@@ -631,195 +746,219 @@
                 <p>Откройте для себя уникальный стиль Love for You</p>
             </div>
             
-<div class="gallery-grid">
-    <!-- Галерея с 12 изображениями (5-16) -->
-    <div class="gallery-item">
-        <img src="1 (5).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-<!--     
-    <div class="gallery-item">
-        <img src="1 (6).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <div class="gallery-item">
-        <img src="1 (7).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div> -->
-    
-    <div class="gallery-item">
-        <img src="1 (8).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <div class="gallery-item">
-        <img src="1 (9).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <div class="gallery-item">
-        <img src="1 (10).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <!-- <div class="gallery-item">
-        <img src="1 (11).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-     -->
-    <div class="gallery-item">
-        <img src="1 (12).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <!-- <div class="gallery-item">
-        <img src="1 (13).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-     -->
-    <div class="gallery-item">
-        <img src="1 (14).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <div class="gallery-item">
-        <img src="1 (15).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    
-    <div class="gallery-item">
-        <img src="1 (16).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="1 (5).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (8).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (9).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (10).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (12).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (14).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (15).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (16).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (20).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (21).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (22).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (23).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (24).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (26).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (27).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (28).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (31).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (32).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (34).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (35).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (36).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (37).jpg" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (38).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (39).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (40).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (41).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (42).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (43).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (44).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (45).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (46).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="1 (47).png" alt="Модель Love for You" class="gallery-image">
+                    <div class="gallery-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Добавляем новые изображения 17-47 -->
-    <!-- <div class="gallery-item">
-        <img src="1 (17).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (18).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (19).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div> -->
-    <div class="gallery-item">
-        <img src="1 (20).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (21).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (22).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (23).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (24).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <!-- <div class="gallery-item">
-        <img src="1 (25).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div> -->
-    <div class="gallery-item">
-        <img src="1 (26).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (27).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (28).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <!-- <div class="gallery-item">
-        <img src="1 (29).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (30).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div> -->
-    <div class="gallery-item">
-        <img src="1 (31).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (32).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <!-- <div class="gallery-item">
-        <img src="1 (33).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div> -->
-    <div class="gallery-item">
-        <img src="1 (34).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (35).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (36).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (37).jpg" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (38).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (39).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (40).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (41).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (42).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (43).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (44).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (45).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (46).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-    <div class="gallery-item">
-        <img src="1 (47).png" alt="Модель Love for You" class="gallery-image">
-        <div class="gallery-overlay"></div>
-    </div>
-</div>
-
+    <section id="feedback" class="feedback">
+        <div class="container">
+            <div class="feedback-header">
+                <h2 class="section-title center-title">Отзывы</h2>
+                <p>Что говорят наши клиенты о Love for You</p>
+            </div>
+            <div class="feedback-slider">
+                <div class="feedback-slides">
+                    <div class="feedback-slide"><img src="./feedback/fs (1).webp" alt="Отзыв 1" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (2).webp" alt="Отзыв 2" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (3).webp" alt="Отзыв 3" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (4).webp" alt="Отзыв 4" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (5).webp" alt="Отзыв 5" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (6).webp" alt="Отзыв 6" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (7).webp" alt="Отзыв 7" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (8).webp" alt="Отзыв 8" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (9).webp" alt="Отзыв 9" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (10).webp" alt="Отзыв 10" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (11).webp" alt="Отзыв 11" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (12).webp" alt="Отзыв 12" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (13).webp" alt="Отзыв 13" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (14).webp" alt="Отзыв 14" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (15).webp" alt="Отзыв 15" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (16).webp" alt="Отзыв 16" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (17).webp" alt="Отзыв 17" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (18).webp" alt="Отзыв 18" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (19).webp" alt="Отзыв 19" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (20).webp" alt="Отзыв 20" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (21).webp" alt="Отзыв 21" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (22).webp" alt="Отзыв 22" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (23).webp" alt="Отзыв 23" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (24).webp" alt="Отзыв 24" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (25).webp" alt="Отзыв 25" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (26).webp" alt="Отзыв 26" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (27).webp" alt="Отзыв 27" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (28).webp" alt="Отзыв 28" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (29).webp" alt="Отзыв 29" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (30).webp" alt="Отзыв 30" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (31).webp" alt="Отзыв 31" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (32).webp" alt="Отзыв 32" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (33).webp" alt="Отзыв 33" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (34).webp" alt="Отзыв 34" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (35).webp" alt="Отзыв 35" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (36).webp" alt="Отзыв 36" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (37).webp" alt="Отзыв 37" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (38).webp" alt="Отзыв 38" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (39).webp" alt="Отзыв 39" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (40).webp" alt="Отзыв 40" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (41).webp" alt="Отзыв 41" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (42).webp" alt="Отзыв 42" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (43).webp" alt="Отзыв 43" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (44).webp" alt="Отзыв 44" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (45).webp" alt="Отзыв 45" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (46).webp" alt="Отзыв 46" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (47).webp" alt="Отзыв 47" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (48).webp" alt="Отзыв 48" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (49).webp" alt="Отзыв 49" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (50).webp" alt="Отзыв 50" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (51).webp" alt="Отзыв 51" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (52).webp" alt="Отзыв 52" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (53).webp" alt="Отзыв 53" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (54).webp" alt="Отзыв 54" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (55).webp" alt="Отзыв 55" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (56).webp" alt="Отзыв 56" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (57).webp" alt="Отзыв 57" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (58).webp" alt="Отзыв 58" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (59).webp" alt="Отзыв 59" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (60).webp" alt="Отзыв 60" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (61).webp" alt="Отзыв 61" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (62).webp" alt="Отзыв 62" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (63).webp" alt="Отзыв 63" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (64).webp" alt="Отзыв 64" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (65).webp" alt="Отзыв 65" class="feedback-image"></div>
+                    <div class="feedback-slide"><img src="./feedback/fs (66).webp" alt="Отзыв 66" class="feedback-image"></div>
+                </div>
+                <div class="feedback-nav">
+                    <button class="feedback-nav-button prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="feedback-nav-button next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -904,6 +1043,91 @@
 
         // Auto slide every 5 seconds
         setInterval(nextSlide, 5000);
+
+        // Feedback slider
+        const feedbackSlides = document.querySelector('.feedback-slides');
+        const prevButton = document.querySelector('.feedback-nav-button.prev');
+        const nextButton = document.querySelector('.feedback-nav-button.next');
+        let currentFeedbackSlide = 0;
+        const totalFeedbackSlides = document.querySelectorAll('.feedback-slide').length;
+        let slidesPerView = window.innerWidth <= 576 ? 1 : window.innerWidth <= 992 ? 2 : 3;
+        let autoSlideInterval;
+
+        function updateFeedbackSlider() {
+            const slideWidth = 100 / slidesPerView;
+            feedbackSlides.style.transform = `translateX(-${currentFeedbackSlide * slideWidth}%)`;
+        }
+
+        function nextFeedbackSlide() {
+            if (currentFeedbackSlide < totalFeedbackSlides - slidesPerView) {
+                currentFeedbackSlide++;
+            } else {
+                currentFeedbackSlide = 0;
+            }
+            updateFeedbackSlider();
+        }
+
+        function prevFeedbackSlide() {
+            if (currentFeedbackSlide > 0) {
+                currentFeedbackSlide--;
+            } else {
+                currentFeedbackSlide = totalFeedbackSlides - slidesPerView;
+            }
+            updateFeedbackSlider();
+        }
+
+        // Auto slide every 3 seconds
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextFeedbackSlide, 3000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        startAutoSlide();
+
+        // Manual navigation
+        nextButton.addEventListener('click', () => {
+            stopAutoSlide();
+            nextFeedbackSlide();
+            startAutoSlide();
+        });
+
+        prevButton.addEventListener('click', () => {
+            stopAutoSlide();
+            prevFeedbackSlide();
+            startAutoSlide();
+        });
+
+        // Touch swipe functionality
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        feedbackSlides.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoSlide();
+        });
+
+        feedbackSlides.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                nextFeedbackSlide();
+            } else if (touchEndX - touchStartX > 50) {
+                prevFeedbackSlide();
+            }
+            startAutoSlide();
+        });
+
+        // Update slider on window resize
+        window.addEventListener('resize', () => {
+            const newSlidesPerView = window.innerWidth <= 576 ? 1 : window.innerWidth <= 992 ? 2 : 3;
+            if (newSlidesPerView !== slidesPerView) {
+                slidesPerView = newSlidesPerView;
+                currentFeedbackSlide = Math.min(currentFeedbackSlide, totalFeedbackSlides - slidesPerView);
+                updateFeedbackSlider();
+            }
+        });
     </script>
 </body>
 </html>
