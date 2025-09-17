@@ -118,19 +118,82 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 100%);
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 100%);
+        }
+        
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10%;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-1 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        }
+        
+        .slide-2 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            justify-content: flex-start;
+            padding-left: 10%;
+        }
+        
+        .slide-3 {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        }
+        
+        .slide-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .slide-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .slide-content p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 650px;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            border-radius: 5px;
+            margin-left: 10%;
+            border: 2px solid var(--accent-color);
         }
         
         .hero h1 {
@@ -166,6 +229,11 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
+        .btn-small {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.8rem;
+        }
+        
         /* About Section */
         .about {
             padding: 8rem 0;
@@ -190,6 +258,12 @@
             background-size: cover;
             background-position: center;
             position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.02);
         }
         
         .about-image:before {
@@ -201,6 +275,24 @@
             bottom: 20px;
             border: 2px solid var(--accent-color);
             z-index: -1;
+        }
+        
+        .about-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover .about-image-overlay {
+            opacity: 1;
         }
         
         .section-title {
@@ -226,13 +318,13 @@
             line-height: 1.8;
         }
         
-        /* Products Section */
-        .products {
+        /* Gallery Section */
+        .gallery {
             padding: 8rem 0;
             background-color: var(--gray-light);
         }
         
-        .products-header {
+        .gallery-header {
             text-align: center;
             margin-bottom: 4rem;
         }
@@ -242,132 +334,65 @@
             transform: translateX(-50%);
         }
         
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        .category-btn {
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Raleway', sans-serif;
-            font-size: 1rem;
-        }
-        
-        .category-btn.active, .category-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--light-color);
-        }
-        
-        .products-grid {
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2.5rem;
         }
         
-        .product-card {
+        .gallery-item {
             background-color: var(--light-color);
             overflow: hidden;
             position: relative;
             transition: var(--transition);
+            height: 400px;
         }
         
-        .product-card:hover {
+        .gallery-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .product-image {
+        .gallery-image {
             width: 100%;
-            height: 380px;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .product-card:hover .product-image {
+        .gallery-item:hover .gallery-image {
             transform: scale(1.05);
         }
         
-        .product-info {
-            padding: 1.8rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .product-info h3 {
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-        }
-        
-        .product-info p {
-            color: #666;
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
-        }
-        
-        .product-overlay {
+        .gallery-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: var(--transition);
-        }
-        
-        .product-card:hover .product-overlay {
-            opacity: 1;
-        }
-        
-        /* Lookbook Section */
-        .lookbook {
-            padding: 8rem 0;
-        }
-        
-        .lookbook-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        .lookbook-item {
-            position: relative;
-            height: 500px;
-            overflow: hidden;
-        }
-        
-        .lookbook-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .lookbook-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             padding: 2rem;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            text-align: center;
             color: var(--light-color);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: var(--transition);
         }
         
-        .lookbook-item:hover .lookbook-overlay {
-            transform: translateY(0);
+        .gallery-item:hover .gallery-overlay {
             opacity: 1;
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-overlay p {
+            margin-bottom: 1.5rem;
         }
         
         /* CTA Section */
@@ -501,8 +526,13 @@
                 width: 100%;
             }
             
-            .lookbook-grid {
-                grid-template-columns: 1fr;
+            .slide {
+                justify-content: center;
+                padding: 0 5%;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
             }
         }
         
@@ -523,16 +553,20 @@
                 font-size: 2.8rem;
             }
             
-            .categories {
-                flex-wrap: wrap;
-            }
-            
-            .products-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .slide-content {
+                padding: 2rem;
+            }
+            
+            .slide-content h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -544,8 +578,7 @@
             <nav>
                 <ul>
                     <li><a href="#about">О бренде</a></li>
-                    <li><a href="#products">Коллекция</a></li>
-                    <li><a href="#lookbook">Lookbook</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
                     <li><a href="#cta">Купить</a></li>
                 </ul>
             </nav>
@@ -553,11 +586,23 @@
     </header>
 
     <section class="hero">
+        <div class="hero-slider">
+            <div class="slide slide-1 active">
+            
+            </div>
+            <div class="slide slide-2">
+              
+            </div>
+            <div class="slide slide-3">
+             
+            </div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
-                <h1>Элегантность с дерзким характером</h1>
+                <h1>Love for You</h1>
                 <p>Love for You — это уникальное сочетание утонченности и смелости в каждой детали вашего образа.</p>
-                <a href="#products" class="btn">Открыть коллекцию</a>
+                <a href="#gallery" class="btn">Открыть коллекцию</a>
             </div>
         </div>
     </section>
@@ -569,119 +614,70 @@
                     <h2 class="section-title">О бренде</h2>
                     <p>Love for You — это больше чем одежда. Это философия, выраженная через ткани и крой. Мы создаем вещи для женщин, которые ценят исключительное качество, смелые решения и неповторимый стиль.</p>
                     <p>Наша миссия — подчеркнуть вашу индивидуальность, подарив ощущение уверенности и роскоши в каждой детали.</p>
-                    <p>От идеи до реализации — мы уделяем внимание каждой детали, создавая не просто одежду, а произведения fashion-искусства.</p>
+                    <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Перейти в магазин</a>
                 </div>
-                <div class="about-image"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="products">
-        <div class="container">
-            <div class="products-header">
-                <h2 class="section-title center-title">Коллекция</h2>
-                <p>Откройте для себя наши основные категории продукции</p>
-            </div>
-            
-            <div class="categories">
-                <button class="category-btn active">Все товары</button>
-                <button class="category-btn">Платья</button>
-                <button class="category-btn">Верхняя одежда</button>
-                <button class="category-btn">Костюмы</button>
-                <button class="category-btn">Аксессуары</button>
-            </div>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Элегантное платье" class="product-image">
-                    <div class="product-info">
-                        <h3>Миди-платье с акцентным поясом</h3>
-                        <p>Идеальный силуэт для особого случая</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Дерзкий костюм" class="product-image">
-                    <div class="product-info">
-                        <h3>Костюм с зауженными брюками</h3>
-                        <p>Мощный деловой образ с характером</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Стильное пальто" class="product-image">
-                    <div class="product-info">
-                        <h3>Пальто oversize с широким лацканом</h3>
-                        <p>Главный акцент вашего образа</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1588175996413-f5e7a854fd26?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Утонченный топ" class="product-image">
-                    <div class="product-info">
-                        <h3>Шелковый топ с драпировкой</h3>
-                        <p>Изысканность в каждой детали</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Юбка с запахом" class="product-image">
-                    <div class="product-info">
-                        <h3>Юбка миди с запахом</h3>
-                        <p>Женственность и элегантность</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1588175996413-f5e7a854fd26?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Кожаная куртка" class="product-image">
-                    <div class="product-info">
-                        <h3>Кожаная куртка приталенного кроя</h3>
-                        <p>Дерзкий акцент в вашем гардеробе</p>
-                    </div>
-                    <div class="product-overlay">
-                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Смотреть на Wildberries</a>
+                <div class="about-image">
+                    <div class="about-image-overlay">
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn" target="_blank">Купить сейчас</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="lookbook" class="lookbook">
+    <section id="gallery" class="gallery">
         <div class="container">
-            <div class="products-header">
-                <h2 class="section-title center-title">Lookbook</h2>
-                <p>Вдохновляйтесь образами от Love for You</p>
+            <div class="gallery-header">
+                <h2 class="section-title center-title">Галерея</h2>
+                <p>Откройте для себя уникальный стиль Love for You</p>
             </div>
             
-            <div class="lookbook-grid">
-                <div class="lookbook-item">
-                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Вечерний образ" class="lookbook-image">
-                    <div class="lookbook-overlay">
-                        <h3>Вечерняя элегантность</h3>
-                        <p>Идеальный образ для особого случая</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Элегантное платье" class="gallery-image">
+                    <div class="gallery-overlay">
+          
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
                     </div>
                 </div>
                 
-                <div class="lookbook-item">
-                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Деловой стиль" class="lookbook-image">
-                    <div class="lookbook-overlay">
-                        <h3>Деловой шик</h3>
-                        <p>Сочетание элегантности и комфорта</p>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Дерзкий образ" class="gallery-image">
+                    <div class="gallery-overlay">
+           
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1583496661160-fb5886a13d77?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Стильный образ" class="gallery-image">
+                    <div class="gallery-overlay">
+              
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1588175996413-f5e7a854fd26?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Утонченный образ" class="gallery-image">
+                    <div class="gallery-overlay">
+            
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Вечерний образ" class="gallery-image">
+                    <div class="gallery-overlay">
+                 
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Деловой стиль" class="gallery-image">
+                    <div class="gallery-overlay">
+                 
+                        <a href="https://www.wildberries.ru/brands/love-for-you" class="btn btn-small" target="_blank">Купить</a>
                     </div>
                 </div>
             </div>
@@ -701,24 +697,13 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Love for You</h3>
-                    <p>Эксклюзивная женская одежда, сочетающая утонченность и дерзкий характер.</p>
+            
                     <div class="social-links">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-vk"></i></a>
                         <a href="#"><i class="fab fa-pinterest"></i></a>
                     </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Коллекции</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Новая коллекция</a></li>
-                        <li><a href="#">Платья</a></li>
-                        <li><a href="#">Верхняя одежда</a></li>
-                        <li><a href="#">Костюмы</a></li>
-                        <li><a href="#">Аксессуары</a></li>
-                    </ul>
                 </div>
                 
                 <div class="footer-column">
@@ -764,14 +749,22 @@
             });
         });
 
-        // Category buttons
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-            });
-        });
+        // Hero slider
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
     </script>
 </body>
 </html>
