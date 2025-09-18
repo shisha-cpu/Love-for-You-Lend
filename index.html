@@ -97,6 +97,7 @@
             font-size: 1.1rem;
             transition: var(--transition);
             position: relative;
+            white-space: nowrap;
         }
         
         nav ul li a:after {
@@ -487,6 +488,40 @@
         }
 
         @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row; /* Логотип и ссылки в одном ряду */
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem 1rem; /* Уменьшенные отступы */
+            }
+            
+            header {
+                padding: 0.6rem 0; /* Уменьшаем высоту шапки */
+            }
+            
+            header.scrolled {
+                padding: 0.4rem 0; /* Еще меньше при прокрутке */
+            }
+            
+            .logo {
+                font-size: 1.8rem; /* Меньший размер логотипа */
+                line-height: 1.2;
+            }
+            
+            nav ul {
+                margin: 0; /* Убираем отступ сверху */
+                padding: 0;
+            }
+            
+            nav ul li {
+                margin-left: 1rem; /* Уменьшенные отступы между ссылками */
+                margin-right: 0.5rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.85rem; /* Меньший размер шрифта ссылок */
+            }
+            
             .feedback-slide {
                 flex: 0 0 100%;
             }
@@ -501,6 +536,23 @@
         }
 
         @media (max-width: 576px) {
+            .header-container {
+                padding: 0.4rem 0.8rem; /* Еще меньшие отступы для маленьких экранов */
+            }
+            
+            .logo {
+                font-size: 1.5rem; /* Еще меньше логотип */
+            }
+            
+            nav ul li {
+                margin-left: 0.8rem;
+                margin-right: 0.3rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.75rem; /* Минимальный размер шрифта ссылок */
+            }
+            
             .feedback {
                 padding: 4rem 0;
             }
@@ -659,18 +711,6 @@
         }
         
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 1.5rem;
-            }
-            
-            nav ul li {
-                margin: 0 0.8rem;
-            }
-            
             .hero h1 {
                 font-size: 3.5rem;
             }
@@ -883,7 +923,7 @@
         <div class="container">
             <div class="feedback-header">
                 <h2 class="section-title center-title">Отзывы</h2>
-                <p>Что говорят наши клиенты о Love for You</p>
+                <p>Что говорят наши прекрасные покупательницы о Love for You</p>
             </div>
             <div class="feedback-slider">
                 <div class="feedback-slides">
