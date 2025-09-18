@@ -75,6 +75,7 @@
             color: var(--primary-color);
             text-decoration: none;
             letter-spacing: 1px;
+            white-space: nowrap; /* Prevent logo text from wrapping */
         }
         
         .logo span {
@@ -403,7 +404,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Feedback Slider Section */
+        /* Feedback Section (теперь как галерея) */
         .feedback {
             padding: 8rem 0;
             background-color: var(--light-color);
@@ -414,134 +415,121 @@
             margin-bottom: 4rem;
         }
 
-        .feedback-slider {
-            position: relative;
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feedback-item {
+            background-color: var(--light-color);
             overflow: hidden;
-            width: 100%;
-            user-select: none;
-            touch-action: pan-y;
+            position: relative;
+            transition: var(--transition);
+            height: 400px;
         }
-
-        .feedback-slides {
-            display: flex;
-            transition: transform 0.5s ease;
+        
+        .feedback-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-
-        .feedback-slide {
-            flex: 0 0 33.33%;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
+        
         .feedback-image {
             width: 100%;
-            height: 400px;
+            height: 100%;
             object-fit: cover;
-            border: 2px solid var(--accent-color);
-            border-radius: 10px;
-            transition: var(--transition);
+            transition: transform 0.5s ease;
         }
-
-        .feedback-slide:hover .feedback-image {
+        
+        .feedback-item:hover .feedback-image {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
-        .feedback-nav {
+        
+        .feedback-overlay {
             position: absolute;
-            top: 50%;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 20px;
-        }
-
-        .feedback-nav-button {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: var(--light-color);
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            opacity: 0;
             transition: var(--transition);
+            padding: 2rem;
+            text-align: center;
+            color: var(--light-color);
         }
-
-        .feedback-nav-button:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.1);
+        
+        .feedback-item:hover .feedback-overlay {
+            opacity: 1;
         }
-
-        @media (max-width: 992px) {
-            .feedback-slide {
-                flex: 0 0 50%;
-            }
-            .feedback-image {
-                height: 350px;
-            }
+        
+        .feedback-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feedback-overlay p {
+            margin-bottom: 1.5rem;
         }
 
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: row; /* Логотип и ссылки в одном ряду */
+                flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
-                padding: 0.5rem 1rem; /* Уменьшенные отступы */
+                padding: 0.5rem 1rem;
+                flex-wrap: nowrap; /* Prevent wrapping of header content */
             }
             
             header {
-                padding: 0.6rem 0; /* Уменьшаем высоту шапки */
+                padding: 0.6rem 0;
             }
             
             header.scrolled {
-                padding: 0.4rem 0; /* Еще меньше при прокрутке */
+                padding: 0.4rem 0;
             }
             
             .logo {
-                font-size: 1.4rem; /* Меньший размер логотипа */
+                font-size: 1.4rem;
                 line-height: 1.2;
             }
             
             nav ul {
-                margin: 0; /* Убираем отступ сверху */
+                margin: 0;
                 padding: 0;
             }
             
             nav ul li {
-                margin-left: 1rem; /* Уменьшенные отступы между ссылками */
+                margin-left: 1rem;
                 margin-right: 0.5rem;
             }
             
             nav ul li a {
-                font-size: 0.85rem; /* Меньший размер шрифта ссылок */
+                font-size: 0.85rem;
             }
             
-            .feedback-slide {
-                flex: 0 0 100%;
+            .feedback-grid {
+                grid-template-columns: repeat(2, 1fr); /* Ensure two columns on mobile */
+                gap: 1.5rem;
             }
-            .feedback-image {
+            
+            .feedback-item {
                 height: 300px;
-            }
-            .feedback-nav-button {
-                width: 35px;
-                height: 35px;
-                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 576px) {
             .header-container {
-                padding: 0.4rem 0.8rem; /* Еще меньшие отступы для маленьких экранов */
+                padding: 0.4rem 0.8rem;
+                flex-wrap: nowrap; /* Ensure no wrapping on very small screens */
             }
             
             .logo {
-                font-size: 1.2rem; /* Еще меньше логотип */
+                font-size: 1.2rem;
             }
             
             nav ul li {
@@ -550,24 +538,21 @@
             }
             
             nav ul li a {
-                font-size: 0.75rem; /* Минимальный размер шрифта ссылок */
+                font-size: 0.75rem;
             }
             
             .feedback {
                 padding: 4rem 0;
             }
-            .feedback-image {
-                height: 250px;
+            
+            .feedback-grid {
+                grid-template-columns: repeat(2, 1fr); /* Maintain two columns even on very small screens */
+                gap: 1rem;
             }
-            .feedback-nav {
-                padding: 0 10px;
+            
+            .feedback-item {
+                height: 250px; /* Adjust height for better fit */
             }
-            .feedback-nav-button {
-                width: 30px;
-                height: 30px;
-                font-size: 1rem;
-            }
-           
         }
         
         /* CTA Section */
@@ -717,7 +702,7 @@
             }
             
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Keep gallery as single column */
             }
             
             .footer-content {
@@ -926,79 +911,73 @@
                 <h2 class="section-title center-title">Отзывы</h2>
                 <p>Наши прекрасные покупательницы</p>
             </div>
-            <div class="feedback-slider">
-                <div class="feedback-slides">
-                    <div class="feedback-slide"><img src="./feedback/fs (1).webp" alt="Отзыв 1" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (2).webp" alt="Отзыв 2" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (3).webp" alt="Отзыв 3" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (4).webp" alt="Отзыв 4" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (5).webp" alt="Отзыв 5" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (6).webp" alt="Отзыв 6" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (7).webp" alt="Отзыв 7" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (8).webp" alt="Отзыв 8" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (9).webp" alt="Отзыв 9" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (10).webp" alt="Отзыв 10" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (11).webp" alt="Отзыв 11" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (12).webp" alt="Отзыв 12" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (13).webp" alt="Отзыв 13" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (14).webp" alt="Отзыв 14" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (15).webp" alt="Отзыв 15" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (16).webp" alt="Отзыв 16" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (17).webp" alt="Отзыв 17" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (18).webp" alt="Отзыв 18" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (19).webp" alt="Отзыв 19" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (20).webp" alt="Отзыв 20" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (21).webp" alt="Отзыв 21" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (22).webp" alt="Отзыв 22" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (23).webp" alt="Отзыв 23" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (24).webp" alt="Отзыв 24" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (25).webp" alt="Отзыв 25" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (26).webp" alt="Отзыв 26" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (27).webp" alt="Отзыв 27" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (28).webp" alt="Отзыв 28" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (29).webp" alt="Отзыв 29" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (30).webp" alt="Отзыв 30" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (31).webp" alt="Отзыв 31" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (32).webp" alt="Отзыв 32" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (33).webp" alt="Отзыв 33" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (34).webp" alt="Отзыв 34" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (35).webp" alt="Отзыв 35" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (36).webp" alt="Отзыв 36" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (37).webp" alt="Отзыв 37" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (38).webp" alt="Отзыв 38" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (39).webp" alt="Отзыв 39" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (40).webp" alt="Отзыв 40" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (41).webp" alt="Отзыв 41" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (42).webp" alt="Отзыв 42" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (43).webp" alt="Отзыв 43" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (44).webp" alt="Отзыв 44" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (45).webp" alt="Отзыв 45" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (46).webp" alt="Отзыв 46" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (47).webp" alt="Отзыв 47" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (48).webp" alt="Отзыв 48" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (49).webp" alt="Отзыв 49" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (50).webp" alt="Отзыв 50" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (51).webp" alt="Отзыв 51" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (52).webp" alt="Отзыв 52" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (53).webp" alt="Отзыв 53" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (54).webp" alt="Отзыв 54" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (55).webp" alt="Отзыв 55" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (56).webp" alt="Отзыв 56" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (57).webp" alt="Отзыв 57" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (58).webp" alt="Отзыв 58" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (59).webp" alt="Отзыв 59" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (60).webp" alt="Отзыв 60" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (61).webp" alt="Отзыв 61" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (62).webp" alt="Отзыв 62" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (63).webp" alt="Отзыв 63" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (64).webp" alt="Отзыв 64" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (65).webp" alt="Отзыв 65" class="feedback-image"></div>
-                    <div class="feedback-slide"><img src="./feedback/fs (66).webp" alt="Отзыв 66" class="feedback-image"></div>
-                </div>
-                <div class="feedback-nav">
-                    <button class="feedback-nav-button prev"><i class="fas fa-chevron-left"></i></button>
-                    <button class="feedback-nav-button next"><i class="fas fa-chevron-right"></i></button>
-                </div>
+            <div class="feedback-grid">
+                <div class="feedback-item"><img src="./feedback/fs (1).webp" alt="Отзыв 1" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (2).webp" alt="Отзыв 2" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (3).webp" alt="Отзыв 3" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (4).webp" alt="Отзыв 4" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (5).webp" alt="Отзыв 5" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (6).webp" alt="Отзыв 6" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (7).webp" alt="Отзыв 7" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (8).webp" alt="Отзыв 8" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (9).webp" alt="Отзыв 9" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (10).webp" alt="Отзыв 10" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (11).webp" alt="Отзыв 11" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (12).webp" alt="Отзыв 12" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (13).webp" alt="Отзыв 13" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (14).webp" alt="Отзыв 14" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (15).webp" alt="Отзыв 15" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (16).webp" alt="Отзыв 16" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (17).webp" alt="Отзыв 17" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (18).webp" alt="Отзыв 18" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (19).webp" alt="Отзыв 19" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (20).webp" alt="Отзыв 20" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (21).webp" alt="Отзыв 21" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (22).webp" alt="Отзыв 22" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (23).webp" alt="Отзыв 23" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (24).webp" alt="Отзыв 24" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (25).webp" alt="Отзыв 25" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (26).webp" alt="Отзыв 26" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (27).webp" alt="Отзыв 27" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (28).webp" alt="Отзыв 28" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (29).webp" alt="Отзыв 29" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (30).webp" alt="Отзыв 30" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (31).webp" alt="Отзыв 31" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (32).webp" alt="Отзыв 32" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (33).webp" alt="Отзыв 33" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (34).webp" alt="Отзыв 34" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (35).webp" alt="Отзыв 35" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (36).webp" alt="Отзыв 36" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (37).webp" alt="Отзыв 37" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (38).webp" alt="Отзыв 38" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (39).webp" alt="Отзыв 39" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (40).webp" alt="Отзыв 40" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (41).webp" alt="Отзыв 41" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (42).webp" alt="Отзыв 42" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (43).webp" alt="Отзыв 43" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (44).webp" alt="Отзыв 44" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (45).webp" alt="Отзыв 45" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (46).webp" alt="Отзыв 46" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (47).webp" alt="Отзыв 47" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (48).webp" alt="Отзыв 48" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (49).webp" alt="Отзыв 49" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (50).webp" alt="Отзыв 50" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (51).webp" alt="Отзыв 51" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (52).webp" alt="Отзыв 52" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (53).webp" alt="Отзыв 53" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (54).webp" alt="Отзыв 54" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (55).webp" alt="Отзыв 55" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (56).webp" alt="Отзыв 56" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (57).webp" alt="Отзыв 57" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (58).webp" alt="Отзыв 58" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (59).webp" alt="Отзыв 59" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (60).webp" alt="Отзыв 60" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (61).webp" alt="Отзыв 61" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (62).webp" alt="Отзыв 62" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (63).webp" alt="Отзыв 63" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (64).webp" alt="Отзыв 64" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (65).webp" alt="Отзыв 65" class="feedback-image"><div class="feedback-overlay"></div></div>
+                <div class="feedback-item"><img src="./feedback/fs (66).webp" alt="Отзыв 66" class="feedback-image"><div class="feedback-overlay"></div></div>
             </div>
         </div>
     </section>
@@ -1084,91 +1063,6 @@
 
         // Auto slide every 5 seconds
         setInterval(nextSlide, 5000);
-
-        // Feedback slider
-        const feedbackSlides = document.querySelector('.feedback-slides');
-        const prevButton = document.querySelector('.feedback-nav-button.prev');
-        const nextButton = document.querySelector('.feedback-nav-button.next');
-        let currentFeedbackSlide = 0;
-        const totalFeedbackSlides = document.querySelectorAll('.feedback-slide').length;
-        let slidesPerView = window.innerWidth <= 576 ? 1 : window.innerWidth <= 992 ? 2 : 3;
-        let autoSlideInterval;
-
-        function updateFeedbackSlider() {
-            const slideWidth = 100 / slidesPerView;
-            feedbackSlides.style.transform = `translateX(-${currentFeedbackSlide * slideWidth}%)`;
-        }
-
-        function nextFeedbackSlide() {
-            if (currentFeedbackSlide < totalFeedbackSlides - slidesPerView) {
-                currentFeedbackSlide++;
-            } else {
-                currentFeedbackSlide = 0;
-            }
-            updateFeedbackSlider();
-        }
-
-        function prevFeedbackSlide() {
-            if (currentFeedbackSlide > 0) {
-                currentFeedbackSlide--;
-            } else {
-                currentFeedbackSlide = totalFeedbackSlides - slidesPerView;
-            }
-            updateFeedbackSlider();
-        }
-
-        // Auto slide every 3 seconds
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(nextFeedbackSlide, 3000);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        startAutoSlide();
-
-        // Manual navigation
-        nextButton.addEventListener('click', () => {
-            stopAutoSlide();
-            nextFeedbackSlide();
-            startAutoSlide();
-        });
-
-        prevButton.addEventListener('click', () => {
-            stopAutoSlide();
-            prevFeedbackSlide();
-            startAutoSlide();
-        });
-
-        // Touch swipe functionality
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        feedbackSlides.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            stopAutoSlide();
-        });
-
-        feedbackSlides.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) {
-                nextFeedbackSlide();
-            } else if (touchEndX - touchStartX > 50) {
-                prevFeedbackSlide();
-            }
-            startAutoSlide();
-        });
-
-        // Update slider on window resize
-        window.addEventListener('resize', () => {
-            const newSlidesPerView = window.innerWidth <= 576 ? 1 : window.innerWidth <= 992 ? 2 : 3;
-            if (newSlidesPerView !== slidesPerView) {
-                slidesPerView = newSlidesPerView;
-                currentFeedbackSlide = Math.min(currentFeedbackSlide, totalFeedbackSlides - slidesPerView);
-                updateFeedbackSlider();
-            }
-        });
     </script>
 </body>
 </html>
